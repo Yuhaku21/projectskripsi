@@ -25,7 +25,7 @@ if (isset($_POST['update'])) {
     $sql = "UPDATE kriteria SET nama_wisata='$nama_wisata', keindahan='$keindahan', kebersihan='$kebersihan', fasilitas='$fasilitas', harga='$harga', jarak='$jarak', keamanan='$keamanan' WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
-        header('Location: index.php');
+        header('Location: dashboard.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
