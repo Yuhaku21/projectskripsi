@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
 $sql = "SELECT * FROM kriteria_smart";
 $result = $conn->query($sql);
 $dataWisata = [];
-if ($result->num_rows > 0) {
+if ($result !== false && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $dataWisata[] = $row;
     }
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT * FROM bobot_kriteria_smart";
 $result = $conn->query($sql);
 $bobot = [];
-if ($result->num_rows > 0) {
+if ($result !== false && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $bobot = [
             'keindahan' => $row['keindahan'],
@@ -221,175 +221,114 @@ arsort($nilai_akhir);
                         <form method="POST" action="">
                             <div class="mb-3">
                                 <label for="namaWisata" class="form-label">Masukkan Nama Wisata</label>
-                                <input type="text" class="form-control" id="namaWisata" name="nama_wisata" required />
+                                <input type="text" class="form-control" id="namaWisata" name="nama_wisata" required>
                             </div>
                             <div class="mb-3">
-                                <label for="keindahanwisata" class="form-label">Masukkan Nilai Keindahan Wisata</label>
-                                <input type="number" class="form-control" id="keindahanwisata" name="keindahan" required />
+                                <label for="keindahan" class="form-label">Keindahan</label>
+                                <input type="number" class="form-control" id="keindahan" name="keindahan" required>
                             </div>
                             <div class="mb-3">
-                                <label for="kebersihanwisata" class="form-label">Masukkan Nilai Kebersihan Wisata</label>
-                                <input type="number" class="form-control" id="kebersihanwisata" name="kebersihan" required />
+                                <label for="kebersihan" class="form-label">Kebersihan</label>
+                                <input type="number" class="form-control" id="kebersihan" name="kebersihan" required>
                             </div>
                             <div class="mb-3">
-                                <label for="fasilitaswisata" class="form-label">Masukkan Nilai Fasilitas Wisata</label>
-                                <input type="number" class="form-control" id="fasilitaswisata" name="fasilitas" required />
+                                <label for="fasilitas" class="form-label">Fasilitas</label>
+                                <input type="number" class="form-control" id="fasilitas" name="fasilitas" required>
                             </div>
                             <div class="mb-3">
-                                <label for="hargawisata" class="form-label">Masukkan Nilai Harga Wisata</label>
-                                <input type="number" class="form-control" id="hargawisata" name="harga" required />
+                                <label for="harga" class="form-label">Harga</label>
+                                <input type="number" class="form-control" id="harga" name="harga" required>
                             </div>
                             <div class="mb-3">
-                                <label for="jarakwisata" class="form-label">Masukkan Nilai Jarak Wisata</label>
-                                <input type="number" class="form-control" id="jarakwisata" name="jarak" required />
+                                <label for="jarak" class="form-label">Jarak</label>
+                                <input type="number" class="form-control" id="jarak" name="jarak" required>
                             </div>
                             <div class="mb-3">
-                                <label for="keamananwisata" class="form-label">Masukkan Nilai Keamanan Wisata</label>
-                                <input type="number" class="form-control" id="keamananwisata" name="keamanan" required />
+                                <label for="keamanan" class="form-label">Keamanan</label>
+                                <input type="number" class="form-control" id="keamanan" name="keamanan" required>
                             </div>
-                            <button type="submit" name="submit" class="btn btn-success">Tambah Kriteria</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
-                <!--Tabel Hasil Perhitungan SMART-->
-                <div class="card mt-5">
-                    <div class="card-body">
-                    <div class="mt-4">
-                    <h3><b>Hasil Perhitungan SMART</b></h3>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nama Wisata</th>
-                                <th>Nilai Akhir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($nilai_akhir as $nama_wisata => $nilai) {
-                                echo "<tr>";
-                                echo "<td>{$nama_wisata}</td>";
-                                echo "<td>" . number_format($nilai, 4) . "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                    </div>
-                </div>
-                <!--Tabel Kriteria dan Alternatif-->
-                <div class="card mt-5">
-                    <div class="card-body">
-                    <div class="mt-4">
-                    <h3><b>Tabel Kriteria dan Alternatif</b></h3>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nama Wisata</th>
-                                <th>N.Keindahan</th>
-                                <th>N.Kebersihan</th>
-                                <th>N.Fasilitas</th>
-                                <th>N.Harga</th>
-                                <th>N.Jarak</th>
-                                <th>N.Keamanan</th>
-                                <th>N.Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($dataWisata as $wisata) {
-                                echo "<tr>";
-                                echo "<td>{$wisata['nama_wisata']}</td>";
-                                echo "<td>{$wisata['keindahan']}</td>";
-                                echo "<td>{$wisata['kebersihan']}</td>";
-                                echo "<td>{$wisata['fasilitas']}</td>";
-                                echo "<td>{$wisata['harga']}</td>";
-                                echo "<td>{$wisata['jarak']}</td>";
-                                echo "<td>{$wisata['keamanan']}</td>";
-                                echo "<td>";
-                                echo "<a href='?delete_id={$wisata['id']}' class='btn btn-danger btn-sm'>Hapus</a>";
-                                echo " <button class='btn btn-warning btn-sm' onclick='editData(" . json_encode($wisata) . ")'>Edit</button>";
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Modal Edit Data -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Data Wisata</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <!--Tabel Hasil Perhitungan SMART-->
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><b>Hasil Perhitungan SMART</b></h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nama Wisata</th>
+                                    <th>Keindahan</th>
+                                    <th>Kebersihan</th>
+                                    <th>Fasilitas</th>
+                                    <th>Harga</th>
+                                    <th>Jarak</th>
+                                    <th>Keamanan</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($dataWisata as $wisata): ?>
+                                    <tr>
+                                        <td><?= $wisata['nama_wisata'] ?></td>
+                                        <td><?= $wisata['keindahan'] ?></td>
+                                        <td><?= $wisata['kebersihan'] ?></td>
+                                        <td><?= $wisata['fasilitas'] ?></td>
+                                        <td><?= $wisata['harga'] ?></td>
+                                        <td><?= $wisata['jarak'] ?></td>
+                                        <td><?= $wisata['keamanan'] ?></td>
+                                        <td>
+                                            <a href="?delete_id=<?= $wisata['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="edit_smart.php?id=<?= $wisata['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <form method="POST" action="">
-                    <div class="modal-body">
-                        <input type="hidden" id="editId" name="id">
-                        <div class="mb-3">
-                            <label for="editNamaWisata" class="form-label">Nama Wisata</label>
-                            <input type="text" class="form-control" id="editNamaWisata" name="nama_wisata" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editKeindahan" class="form-label">Keindahan</label>
-                            <input type="number" class="form-control" id="editKeindahan" name="keindahan" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editKebersihan" class="form-label">Kebersihan</label>
-                            <input type="number" class="form-control" id="editKebersihan" name="kebersihan" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editFasilitas" class="form-label">Fasilitas</label>
-                            <input type="number" class="form-control" id="editFasilitas" name="fasilitas" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editHarga" class="form-label">Harga</label>
-                            <input type="number" class="form-control" id="editHarga" name="harga" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editJarak" class="form-label">Jarak</label>
-                            <input type="number" class="form-control" id="editJarak" name="jarak" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editKeamanan" class="form-label">Keamanan</label>
-                            <input type="number" class="form-control" id="editKeamanan" name="keamanan" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" name="edit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
+
+            <!--Menampilkan hasil akhir perhitungan SMART-->
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><b>Ranking Hasil Perhitungan SMART</b></h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Ranking</th>
+                                    <th>Nama Wisata</th>
+                                    <th>Nilai Akhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $rank = 1;
+                                foreach ($nilai_akhir as $nama_wisata => $nilai):
+                                ?>
+                                    <tr>
+                                        <td><?= $rank++ ?></td>
+                                        <td><?= $nama_wisata ?></td>
+                                        <td><?= $nilai ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function editData(data) {
-            $('#editId').val(data.id);
-            $('#editNamaWisata').val(data.nama_wisata);
-            $('#editKeindahan').val(data.keindahan);
-            $('#editKebersihan').val(data.kebersihan);
-            $('#editFasilitas').val(data.fasilitas);
-            $('#editHarga').val(data.harga);
-            $('#editJarak').val(data.jarak);
-            $('#editKeamanan').val(data.keamanan);
-            $('#editModal').modal('show');
-        }
-    </script>
-
 </body>
 
 </html>
