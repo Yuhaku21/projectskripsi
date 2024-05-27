@@ -144,21 +144,23 @@ if ($result->num_rows > 0) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Informasi Wisata</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Informasi SIG
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Berdasarkan SAW</a></li>
+                            <li><a class="dropdown-item" href="psmart.php">Berdasarkan SMART</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="rekomendasi.html">Rekomendasi</a>
                     </li>
-                    <div class="spacer" style="margin-right: 30px"></div>
-                    <li class="nav-item">
-                        <a class="btn btn-success" href="daftar.php">Daftar</a>
-                    </li>
                     <div class="spacer" style="margin-right: 10px; margin-top: 10px"></div>
                     <li class="nav-item">
-                        <a class="btn btn-outline-success" href="login-pengguna.php">Login</a>
+                        <a class="btn btn-outline-success" href="index.html">Logout</a>
                     </li>
                 </ul>
             </div>

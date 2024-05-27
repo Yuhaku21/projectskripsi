@@ -150,30 +150,36 @@ arsort($nilai_akhir);
 <body>
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-      <a class="navbar-brand" href="#"><b>Wisata<span style="color: purple">Loteng</span></b></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="informasi-wisata.html">Informasi Wisata</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Rekomendasi</a>
-          </li>
-          <div class="spacer" style="margin-right: 30px"></div>
-          <li class="nav-item">
-            <a class="btn btn-success" href="index.html">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        <div class="container">
+            <a class="navbar-brand" href="#"><b>Wisata<span style="color: purple">Loteng</span></b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Informasi SIG
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="psaw.php">Berdasarkan SAW</a></li>
+                            <li><a class="dropdown-item" href="#">Berdasarkan SMART</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rekomendasi</a>
+                    </li>
+                    <div class="spacer" style="margin-right: 10px; margin-top: 10px"></div>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success" href="index.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
   <!--Navbar-->
 
   <!--Section Rekomendasi Wisata-->
