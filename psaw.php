@@ -1,16 +1,22 @@
 <?php
 include 'db.php';
 
-if (isset($_POST['submit'])) {
-    $nama_wisata = $_POST['nama_wisata'];
-    $keindahan = $_POST['keindahan'];
-    $kebersihan = $_POST['kebersihan'];
-    $fasilitas = $_POST['fasilitas'];
-    $harga = $_POST['harga'];
-    $jarak = $_POST['jarak'];
-    $keamanan = $_POST['keamanan'];
+// Memastikan koneksi ke database
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
 
-    $sql = "INSERT INTO kriteria (nama_wisata, keindahan, kebersihan, fasilitas, harga, jarak, keamanan) VALUES ('$nama_wisata', '$keindahan', '$kebersihan', '$fasilitas', '$harga', '$jarak', '$keamanan')";
+if (isset($_POST['submit'])) {
+    $nama_wisata = $conn->real_escape_string($_POST['nama_wisata']);
+    $keindahan = (float) $_POST['keindahan'];
+    $kebersihan = (float) $_POST['kebersihan'];
+    $fasilitas = (float) $_POST['fasilitas'];
+    $harga = (float) $_POST['harga'];
+    $jarak = (float) $_POST['jarak'];
+    $keamanan = (float) $_POST['keamanan'];
+
+    $sql = "INSERT INTO kriteria (nama_wisata, keindahan, kebersihan, fasilitas, harga, jarak, keamanan) 
+            VALUES ('$nama_wisata', '$keindahan', '$kebersihan', '$fasilitas', '$harga', '$jarak', '$keamanan')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Data berhasil ditambahkan!";
@@ -68,8 +74,8 @@ function hitungNilaiR($dataWisata, $bobot)
         $R5 = min(array_column($dataWisata, 'jarak')) / $wisata['jarak'];
         $R6 = $wisata['keamanan'] / max(array_column($dataWisata, 'keamanan'));
 
-        // Menghitung nilai total dengan bobot terponderasi
-        $total = $R1 * $bobot['keindahan'] + $R2 * $bobot['kebersihan'] + $R3 * $bobot['fasilitas'] + $R4 * $bobot['harga'] + $R5 * $bobot['jarak'] + $R6 * $bobot['keamanan'];
+        // Menghitung nilai total dengan bobot terponderasi dan format 2 angka di belakang koma
+        $total = number_format($R1 * $bobot['keindahan'] + $R2 * $bobot['kebersihan'] + $R3 * $bobot['fasilitas'] + $R4 * $bobot['harga'] + $R5 * $bobot['jarak'] + $R6 * $bobot['keamanan'], 2);
 
         $R[] = ["nama" => $wisata["nama_wisata"], "nilai" => $total];
     }
@@ -135,10 +141,10 @@ if ($result->num_rows > 0) {
 
 <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 30px; padding-top: 30px">
         <div class="container">
             <a class="navbar-brand" href="#"><b>Wisata<span style="color: purple">Loteng</span></b></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -175,22 +181,52 @@ if ($result->num_rows > 0) {
             <div class="col">
                 <div class="card shadow">
                     <div class="card-body">
-                         <p><b>Keterangan</b></p>
-                         <ul>
+                        <p><b>Keterangan</b></p>
+                        <ul>
                             <li><b>Marker <span style="color: green;">Hijau</span></b>: Menandakan lokasi wisata ranking 1</li>
                             <li><b>Marker <span style="color: blue;">Biru</span></b>: Menandakan lokasi wisata ranking 2</li>
                             <li><b>Marker <span style="color: red;">Merah</span></b>: Menandakan lokasi wisata ranking 3</li>
                             <li><b>Marker <span style="color: gray;">Abu Abu</span></b>: Menandakan lokasi wisata ranking dibawah 3</li>
-                         </ul>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div id="map" style="border-radius: 20px;" class="shadow"></div>
         </div>
-        <!--Peta wisata-->
+        <div class="row mt-4">
+           <div class="col">
+            <div class="card">
+                <div class="card-body">
+                <h4><b>Ranking Wisata Berdasarkan SAW</b></h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Nama Wisata</th>
+                        <th>Nilai SAW</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($R as $index => $row) {
+                        echo "<tr>";
+                        echo "<td>" . ($index + 1) . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['nilai'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+                </div>
+            </div>
+           </div>
+        </div>
     </div>
     <!--Footer-->
-    
+    <div class="footer">
+        <p>&copy; 2023 Wisata Loteng</p>
+    </div>
     <!--Footer-->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -220,11 +256,14 @@ if ($result->num_rows > 0) {
                 html: '<i class="fas fa-map-marker-alt" style="color: ' + markerColor + '; font-size: 32px;"></i>'
             });
 
-            L.marker([wisata.latitude, wisata.longitude], { icon: icon }).addTo(map)
-                .bindPopup('<b>' + wisata.nama + '</b><br>Nilai SAW: ' + wisata.nilai_smart);
+            L.marker([wisata.latitude, wisata.longitude], {
+                    icon: icon
+                }).addTo(map)
+                .bindPopup('<b>' + wisata.nama + '</b><br>Nilai SAW: ' + Number(wisata.nilai_smart).toFixed(2));
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
+

@@ -15,16 +15,6 @@
         bottom: 0;
         height: 50px;
       }
-      .horizontal-cards {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .horizontal-cards .card {
-        margin: 10px;
-        width: 200px; /* Lebar kartu */
-      }
     </style>
   </head>
   <body>
@@ -50,7 +40,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="rekomendasi.html">Rekomendasi</a>
+              <a class="nav-link" href="rekomendasi.html">Destinasi Wisata</a>
             </li>
             <div class="spacer" style="margin-right: 30px"></div>
             <li class="nav-item">
@@ -85,102 +75,18 @@
       <a href="rekomendasi.html" class="btn btn-success mb-4" style="font-size: 28px">Lihat Rekomendasi Wisata</a>
     </div>
     <!--Hero Section-->
-    <!--Rekomendasi Wisata-->
-    <div class="container justify-content-center" style="margin-top: 10%">
-      <h3 class="text-center">Destinasi <span style="color: green">Wisata</span></h3>
-      <p class="text-center">Yuk jelajahi tempat wisata yang ada di Lombok Tengah</p>
-      <!--Data tempat wisata-->
-      <div class="informasi-wisata mt-4 pb-4">
-        <div class="row" style="display: flex; margin: auto; justify-content: center">
-          <!-- Menggunakan class justify-content-center di sini -->
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="pantaikuta.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Pantai Kuta</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="desa sade.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Desa Sade</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="bukit-merese.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Bukit Merese</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="pantaisemeti.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Pantai Smeti</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
+    <!--Destinasi Wisata-->
+    <div class="container" style="margin-top: 10%; margin-bottom: 10%">
+      <div class="konten" style="display: flex">
+        <img src="peresean1.jpg" alt="" height="350px" width="400px" class="rounded shadow" />
+        <div class="text ms-5">
+          <h3><b>Yuk Jelajahi Wisata yang Berada di Lombok Tengah</b></h3>
+          <p>"Jelajahi pesona Lombok Tengah, tempat di mana pegunungan hijau bertemu dengan pantai berpasir putih. Rasakan petualangan seru dan relaksasi sempurna dalam satu destinasi!"</p>
+          <a href="rekomendasi.html" class="btn btn-success" style="font-size: 24px">Lihat Destinasi Wisata</a>
         </div>
-        <div class="row" style="display: flex; margin: auto; justify-content: center">
-          <!-- Menggunakan class justify-content-center di sini -->
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="pantaikuta.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Selong Belanak</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="desa sade.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Pantai Mawun</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="bukit-merese.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Tanjung Aan</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col mt-4">
-            <div class="card shadow" style="width: 14rem">
-              <img src="pantaisemeti.jpg" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Pantai Mawi</h5>
-                <a href="#" class="btn btn-success">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Input Pencarian -->
       </div>
     </div>
-    <!--Data tempat wisata-->
-    <!--Rekomendasi Wisata-->
-    <div class="container mb-5 text-center" style="margin-top: 10%">
-      <h3 class="text-center">Rekomendasi <span style="color: green">Wisata</span></h3>
-      <p class="text-center">Bingung mau cari tempat wisata di Lombok Tengah ?, Yuk cobain fitur rekomendasi wisata di website ini</p>
-      <a href="rekomendasi.html" style="font-size: 24px" class="btn btn-success">Mulai Coba Sekarang</a>
-    </div>
-    <!--Rekomendasi Wisata-->
+    <!--Destinasi Wisata-->
     <!--Footer-->
     <footer class="footer">
       <p>Copyright &copy; ProjectSkripsi</p>

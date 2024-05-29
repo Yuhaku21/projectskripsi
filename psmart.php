@@ -156,10 +156,8 @@ if ($result->num_rows > 0) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -184,10 +182,9 @@ if ($result->num_rows > 0) {
         }
     </style>
 </head>
-
 <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 30px; padding-top: 30px">
         <div class="container">
             <a class="navbar-brand" href="#"><b>Wisata<span style="color: purple">Loteng</span></b></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -240,8 +237,37 @@ if ($result->num_rows > 0) {
             <div id="map" style="border-radius: 20px;" class="shadow"></div>
         </div>
         <!--Peta wisata-->
+
+        <!-- Tabel Ranking Wisata -->
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="mb-3"><b>Ranking Wisata Berdasarkan SMART</b></h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Ranking</th>
+                                    <th>Nama Wisata</th>
+                                    <th>Nilai SMART</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($nilai_akhir as $nama_wisata => $nilai) : ?>
+                                    <tr>
+                                        <td><?php echo $peringkat[$nama_wisata]; ?></td>
+                                        <td><?php echo $nama_wisata; ?></td>
+                                        <td><?php echo round($nilai, 4); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabel Ranking Wisata -->
     </div>
-    <!--Footer-->
     <!--Footer-->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -280,5 +306,5 @@ if ($result->num_rows > 0) {
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>
+

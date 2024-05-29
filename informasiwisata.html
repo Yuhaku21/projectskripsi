@@ -29,7 +29,7 @@
   </head>
   <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 30px; padding-top: 30px">
       <div class="container">
         <a class="navbar-brand" href="#"
           ><b>Wisata<span style="color: purple">Loteng</span></b></a
@@ -40,10 +40,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Informasi Wisata</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Informasi SIG </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="informasiwisata.html">Berdasarkan SAW</a></li>
+                <li><a class="dropdown-item" href="informasiwisata.html">Berdasarkan SMART</a></li>
+              </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="rekomendasi.html">Rekomendasi</a>
@@ -67,11 +71,12 @@
       <div class="container mt-5 mb-5">
         <img src="login.jpg" alt="" width="250px" height="250px" style="display: flex; justify-content: center; align-items: center; margin: auto" />
         <h2 class="text-center">Yuk login atau daftar dulu sebelum bisa lihat rekomendasi wisatanya</h2>
-        <div class="aksi mt-4" style="display: flex; justify-content: center">
+        <div class="aksi mt-4" style="display: flex; justify-content: center; margin-bottom: 20px">
           <a href="daftar.php" class="btn btn-success" style="font-size: 28px">Daftar</a>
           <div class="spacer" style="margin-left: 10px; margin-right: 10px"></div>
           <a class="btn btn-outline-success" href="login-pengguna.php" style="font-size: 28px">Login</a>
         </div>
+        <div class="divider mb-5"></div>
       </div>
       <!--Peta wisata-->
     </div>
