@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container mt-5" style="width: 40%;">
-       <div class="card">
+       <div class="card shadow">
         <div class="card-body">
         <h2 class="mt-3 text-center">Daftar</h2>
         <form action="daftar-proses.php" method="post">

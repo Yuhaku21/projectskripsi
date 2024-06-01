@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container mt-5" style="width: 40%;">
-       <div class="card" >
+       <div class="card shadow" >
         <div class="card-body">
         <h2 class="mt-3 text-center">Login</h2>
         <form action="login-pengguna-proses.php" method="post">
