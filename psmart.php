@@ -205,7 +205,7 @@ if ($result->num_rows > 0) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="rekomendasi-wisata.php">Rekomendasi</a>
+                        <a class="nav-link" href="destinasi-wisata.html">Destinasi Wisata</a>
                     </li>
                     <div class="spacer" style="margin-right: 10px; margin-top: 10px"></div>
                     <li class="nav-item">

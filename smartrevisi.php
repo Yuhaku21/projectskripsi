@@ -123,76 +123,15 @@ arsort($nilai_akhir);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Metode SMART</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <style>
-        body {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: #343a40;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .sidebar a {
-            color: #adb5bd;
-            text-decoration: none;
-        }
-
-        .sidebar a:hover {
-            color: #fff;
-            background-color: #495057;
-        }
-
-        .sidebar .nav-link.active {
-            background-color: #495057;
-            color: #fff;
-        }
-
-        .sidebar .nav-item {
-            margin: 0;
-        }
-
-        .content {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-    </style>
 </head>
 
 <body>
-<div class="sidebar d-flex flex-column p-3">
-      <h4 class="text-center">Halo Admin !</h4>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="dashboard.php">Dashboard</a>
-        </li>  
-        <li class="nav-item">
-          <a class="nav-link" href="msaw.php">Perhitungan SAW</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Perhitungan SMART</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sig.php">Pemetaan Peta SIG</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login-admin.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </li>
-      </ul>
-    </div>
 
     <div class="content">
-        <div class="container-fluid">
-            <h1 class="mt-4">Halaman Perhitungan SMART</h1>
-            <p>Selamat Datang di Halaman Perhitungan SMART</p>
+        <div class="container">
             <!--Tabel Input Data Kriteria dan Alternatif-->
             <div class="container mt-4">
                 <div class="card">
@@ -200,34 +139,86 @@ arsort($nilai_akhir);
                         <h3><b>Tabel Kriteria dan Alternatif</b></h3>
                         <form method="POST" action="">
                             <div class="mb-3">
-                                <label for="namaWisata" class="form-label">Masukkan Nama Wisata</label>
-                                <input type="text" class="form-control" id="namaWisata" name="nama_wisata" required>
+                                <label for="namaWisata" class="form-label">Nama Wisata</label>
+                                <select class="form-select" name="nama_wisata" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="Desa Sade">Desa Sade</option>
+                                    <option value="Pantai Mawun">Pantai Mawun</option>
+                                    <option value="Selong Belanak">Selong Belanak</option>
+                                    <option value="Pantai Tanjung Aan">Pantai Tanjung Aan</option>
+                                    <option value="Pantai Kuta">Pantai Kuta</option>
+                                    <option value="Pantai Mawi">Pantai Mawi</option>
+                                    <option value="Bukit Merese">Bukit Merese</option>
+                                    <option value="Pantai Semeti">Pantai Semeti</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="keindahan" class="form-label">Keindahan</label>
-                                <input type="number" class="form-control" id="keindahan" name="keindahan" required>
+                                <label for="keindahanwisata" class="form-label">Nilai Keindahan</label>
+                                <select class="form-select" name="keindahan" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat tidak Indah</option>
+                                    <option value="2">Tidak indah</option>
+                                    <option value="3">Cukup Indah</option>
+                                    <option value="4">Indah</option>
+                                    <option value="5">Sangat Indah</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="kebersihan" class="form-label">Kebersihan</label>
-                                <input type="number" class="form-control" id="kebersihan" name="kebersihan" required>
+                                <label for="kebersihanwisata" class="form-label">Nilai Kebersihan</label>
+                                <select class="form-select" name="kebersihan" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat tidak bersih</option>
+                                    <option value="2">Tidak bersih</option>
+                                    <option value="3">Cukup bersih</option>
+                                    <option value="4">Bersih</option>
+                                    <option value="5">Sangat Bersih</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="fasilitas" class="form-label">Fasilitas</label>
-                                <input type="number" class="form-control" id="fasilitas" name="fasilitas" required>
+                                <label for="fasilitaswisata" class="form-label">Nilai Fasilitas</label>
+                                <select class="form-select" name="fasilitas" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat tidak lengkap</option>
+                                    <option value="2">Tidak lengkap</option>
+                                    <option value="3">Cukup lengkap</option>
+                                    <option value="4">Lengkap</option>
+                                    <option value="5">Sangat Lengkap</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="harga" class="form-label">Harga</label>
-                                <input type="number" class="form-control" id="harga" name="harga" required>
+                                <label for="hargawisata" class="form-label">Nilai Harga</label>
+                                <select class="form-select" name="harga" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat Mahal</option>
+                                    <option value="2">Mahal</option>
+                                    <option value="3">Cukup Murah</option>
+                                    <option value="4">Murah</option>
+                                    <option value="5">Sangat Murah</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="jarak" class="form-label">Jarak</label>
-                                <input type="number" class="form-control" id="jarak" name="jarak" required>
+                                <label for="jarakwisata" class="form-label">Nilai Jarak</label>
+                                <select class="form-select" name="jarak" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat Jauh</option>
+                                    <option value="2">Jauh</option>
+                                    <option value="3">Cukup Dekat</option>
+                                    <option value="4">Dekat</option>
+                                    <option value="5">Sangat Dekat</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="keamanan" class="form-label">Keamanan</label>
-                                <input type="number" class="form-control" id="keamanan" name="keamanan" required>
+                                <label for="keamananwisata" class="form-label">Nilai Keamanan</label>
+                                <select class="form-select" name="keamanan" required>
+                                    <option selected>Pilih disini</option>
+                                    <option value="1">Sangat tidak Aman</option>
+                                    <option value="2">Tidak Aman</option>
+                                    <option value="3">Cukup Aman</option>
+                                    <option value="4">Aman</option>
+                                    <option value="5">Sangat Aman</option>
+                                </select>
                             </div>
-                            <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </form>
                     </div>
                 </div>
@@ -264,7 +255,7 @@ arsort($nilai_akhir);
                                         <td><?= $wisata['jarak'] ?></td>
                                         <td><?= $wisata['keamanan'] ?></td>
                                         <td>
-                                            <a href="?delete_id=<?= $wisata['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="?delete_smart.php?id=<?= $wisata['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                                             <a href="edit_smart.php?id=<?= $wisata['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                                         </td>
                                     </tr>

@@ -25,11 +25,14 @@ if (isset($_POST['submit'])) {
     }
 }
 
+// Initialize variables
+$dataWisata = [];
+$bobot = [];
+
 // Mengambil data dari database
 $sql = "SELECT * FROM kriteria";
 $result = $conn->query($sql);
-$dataWisata = [];
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $dataWisata[] = $row;
     }
@@ -38,8 +41,7 @@ if ($result->num_rows > 0) {
 // Mengambil bobot dari database
 $sql = "SELECT * FROM bobot_kriteria";
 $result = $conn->query($sql);
-$bobot = [];
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $bobot = [
             'keindahan' => $row['keindahan'],
@@ -102,7 +104,7 @@ foreach ($R as $index => $row) {
     $peringkat[$row['nama']] = $index + 1;
 }
 
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $nama_wisata = $row['nama'];
         $row['nilai_smart'] = isset($nilai_akhir[$nama_wisata]) ? $nilai_akhir[$nama_wisata] : 0;
@@ -122,16 +124,6 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
-        .footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            bottom: 0;
-            height: 50px;
-        }
-
         #map {
             width: 80%;
             height: 400px;
@@ -140,39 +132,6 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 30px; padding-top: 30px">
-        <div class="container">
-            <a class="navbar-brand" href="#"><b>Wisata<span style="color: purple">Loteng</span></b></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Informasi SIG
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Berdasarkan SAW</a></li>
-                            <li><a class="dropdown-item" href="psmart.php">Berdasarkan SMART</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rekomendasi.html">Rekomendasi</a>
-                    </li>
-                    <div class="spacer" style="margin-right: 10px; margin-top: 10px"></div>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-success" href="index.html">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--Navbar-->
     <!--Informasi Wisata-->
     <div class="container mt-5 mb-5">
         <!--Peta wisata-->
@@ -224,10 +183,6 @@ if ($result->num_rows > 0) {
         </div>
     </div>
     <!--Footer-->
-    <div class="footer">
-        <p>&copy; 2023 Wisata Loteng</p>
-    </div>
-    <!--Footer-->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([-8.836956, 116.3525879], 11.27);
@@ -266,4 +221,3 @@ if ($result->num_rows > 0) {
 </body>
 
 </html>
-

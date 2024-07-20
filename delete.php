@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM kriteria WHERE id='$id'";
     
     if ($conn->query($sql) === TRUE) {
-        header('Location: dashboard.php');
+        header('Location: sawrevisi.php');
     } else {
         echo "Error deleting record: " . $conn->error;
     }
